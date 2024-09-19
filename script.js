@@ -1,26 +1,30 @@
 // Telegram Web App API и инициализация
+let user = null;  // Переменная для хранения данных пользователя
+
 if (window.Telegram && window.Telegram.WebApp) {
     const tg = window.Telegram.WebApp;
     tg.expand();
 
-    const user = tg.initDataUnsafe.user;
+    // Получение данных пользователя Telegram
+    user = tg.initDataUnsafe.user;
 
     if (user) {
-        console.log(`Пользователь Telegram: ${user.first_name}`);
+        console.log("Данные пользователя получены:", user);
     } else {
-        console.log("Пользователь Telegram не обнаружен.");
+        console.log("Данные пользователя не получены. Возможно, Web App не открыт в Telegram.");
     }
 } else {
     console.error("Telegram Web App API не доступен. Запустите игру в Telegram.");
 }
 
-let balance = 0; // Стартовый баланс игрока
+// Стартовый баланс игрока
+let balance = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
     const statusText = document.getElementById('statusText');
     const balanceText = document.getElementById('balance');
     const mineBtn = document.getElementById('mineBtn');
-    
+
     // Элементы для разделов
     const farmBtn = document.getElementById('farmBtn');
     const shopBtn = document.getElementById('shopBtn');
@@ -38,23 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 2000);
     });
 
-    // Логика для кнопок разделов
-    farmBtn.addEventListener('click', () => {
-        statusText.textContent = 'Вы открыли раздел "Ферма". Здесь можно управлять вашей криптофермой.';
-    });
-
-    shopBtn.addEventListener('click', () => {
-        statusText.textContent = 'Вы открыли раздел "Магазин". Здесь можно покупать улучшения.';
-    });
-
-    gamesBtn.addEventListener('click', () => {
-        statusText.textContent = 'Вы открыли раздел "Игры". Здесь можно играть в мини-игры.';
-    });
-
+    // Логика для раздела "Профиль"
     profileBtn.addEventListener('click', () => {
         // Проверка наличия данных пользователя
-        if (tg.initDataUnsafe.user) {
-            const user = tg.initDataUnsafe.user;
+        if (user) {
+            console.log("Отображение профиля для пользователя:", user);
             const userProfile = `
                 Имя: ${user.first_name || 'Неизвестно'}
                 Фамилия: ${user.last_name || 'Неизвестно'}
@@ -65,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             statusText.textContent = `Профиль игрока:\n${userProfile}`;
         } else {
             statusText.textContent = 'Профиль не доступен. Запустите игру через Telegram.';
+            console.error("Профиль недоступен. Данные пользователя не получены.");
         }
     });
 });
