@@ -34,3 +34,10 @@ button {
 .nav-bar button {
     font-size: 14px;
 }
+
+/* Стили для профиля */
+#statusText {
+    white-space: pre-line; /* Чтобы строки текста профиля корректно переносились */
+    font-size: 16px;
+    margin-top: 20px;
+}
