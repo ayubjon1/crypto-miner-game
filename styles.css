@@ -1,0 +1,36 @@
+/* Основные стили для страницы */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 60px; /* Отступ снизу для кнопок */
+}
+
+/* Стили для кнопок */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+/* Статус и баланс */
+.status {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+/* Панель навигации внизу экрана */
+.nav-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.nav-bar button {
+    font-size: 14px;
+}
