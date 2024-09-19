@@ -4,31 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Miner</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-        .status {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-    </style>
+    <!-- Подключение внешнего файла стилей -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Crypto Miner</h1>
     <div class="miner">
-        <button id="mineBtn">Начать майнинг!!!</button>
+        <button id="mineBtn">Начать майнинг</button>
         <div class="status" id="statusText">Ожидание...</div>
         <div id="balance">Ваш баланс: 0 BTC</div>
     </div>
 
-    <!-- Подключение скрипта -->
+    <!-- Навигация внизу -->
+    <div class="nav-bar">
+        <button id="farmBtn">Ферма</button>
+        <button id="shopBtn">Магазин</button>
+        <button id="gamesBtn">Игры</button>
+        <button id="profileBtn">Профиль</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
