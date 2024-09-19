@@ -1,16 +1,19 @@
-// Проверяем, загружается ли скрипт
-console.log("Script loaded!");
+// Проверка, загружен ли Telegram Web Apps API
+if (window.Telegram && window.Telegram.WebApp) {
+    // Инициализация Telegram Web App API
+    const tg = window.Telegram.WebApp;
+    console.log("Telegram Web App API initialized");
 
-// Инициализация Telegram Web App API
-const tg = window.Telegram.WebApp;
-console.log("Telegram Web App API initialized");
+    // Расширение Web App на весь экран
+    tg.expand();
+    console.log("Web App expanded");
 
-// Расширение Web App на весь экран
-tg.expand();
-console.log("Web App expanded");
+    // Получение данных пользователя Telegram
+    const user = tg.initDataUnsafe.user;
 
-// Получение данных пользователя Telegram
-const user = tg.initDataUnsafe.user;
+} else {
+    console.error("Telegram Web App API is not available. Are you running this in Telegram?");
+}
 
 // Переменная для хранения баланса
 let balance = 0;
@@ -26,13 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!statusText || !balanceText || !mineBtn) {
         console.error("Один из элементов не найден: статус, баланс или кнопка");
         return;
-    }
-
-    // Проверка наличия пользователя и отображение приветствия
-    if (user) {
-        statusText.textContent = `Привет, ${user.first_name}! Добро пожаловать в Крипто-майнер!`;
-    } else {
-        statusText.textContent = 'Добро пожаловать в Крипто-майнер!';
     }
 
     // Стартовый баланс
