@@ -1,24 +1,24 @@
-// Инициализация Telegram Web App
+// Инициализация Web App API Telegram
 const tg = window.Telegram.WebApp;
-tg.expand(); // Расширяем на весь экран
 
-let balance = 0;
-const mineBtn = document.getElementById('mineBtn');
-const statusText = document.getElementById('statusText');
-const balanceText = document.getElementById('balance');
+// Расширение приложения на весь экран
+tg.expand();
 
-// Функция эмуляции майнинга
-function mineCrypto() {
-    statusText.textContent = 'Майнинг...';
-    
-    // Имитация процесса майнинга (например, через setTimeout)
-    setTimeout(() => {
-        const minedAmount = Math.random().toFixed(8); // Имитация случайного заработка
-        balance += parseFloat(minedAmount);
-        statusText.textContent = `Намайнено: ${minedAmount} BTC`;
-        balanceText.textContent = `Ваш баланс: ${balance.toFixed(8)} BTC`;
-    }, 2000);
+// Получение данных пользователя
+const user = tg.initDataUnsafe.user;
+
+console.log(`Привет, ${user.first_name}!`);
+
+// Пример: добавить взаимодействие с Telegram кнопками
+tg.MainButton.text = "Запустить майнинг";
+tg.MainButton.show();
+
+tg.MainButton.onClick(() => {
+    startMining(); // Функция запуска майнинга
+    tg.MainButton.hide();
+});
+
+function startMining() {
+    // Ваш код для старта майнинга
+    alert("Майнинг начался!");
 }
-
-// Обработка нажатия кнопки "Начать майнинг"
-mineBtn.addEventListener('click', mineCrypto);
