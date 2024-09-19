@@ -1,14 +1,8 @@
-// aaaПроверка, загружен ли Telegram Web Apps API
+// Telegram Web App API и инициализация
 if (window.Telegram && window.Telegram.WebApp) {
-    // Инициализация Telegram Web App API
     const tg = window.Telegram.WebApp;
-    console.log("Telegram Web App API initialized");
-
-    // Расширение Web App на весь экран
     tg.expand();
-    console.log("Web App expanded");
 
-    // Получение данных пользователя Telegram
     const user = tg.initDataUnsafe.user;
 
     if (user) {
@@ -17,44 +11,47 @@ if (window.Telegram && window.Telegram.WebApp) {
         console.log("Пользователь Telegram не обнаружен.");
     }
 } else {
-    console.error("Telegram Web App API is not available. Are you running this in Telegram?");
+    console.error("Telegram Web App API не доступен. Запустите игру в Telegram.");
 }
 
-// Переменная для хранения баланса
 let balance = 0;
 
-// Убедимся, что DOM загружен перед тем, как запускать код
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM fully loaded and parsed");
-
     const statusText = document.getElementById('statusText');
     const balanceText = document.getElementById('balance');
     const mineBtn = document.getElementById('mineBtn');
+    
+    // Элементы для разделов
+    const farmBtn = document.getElementById('farmBtn');
+    const shopBtn = document.getElementById('shopBtn');
+    const gamesBtn = document.getElementById('gamesBtn');
+    const profileBtn = document.getElementById('profileBtn');
 
-    if (!statusText || !balanceText || !mineBtn) {
-        console.error("Один из элементов не найден: статус, баланс или кнопка");
-        return;
-    }
-
-    // Стартовый баланс
-    balanceText.textContent = `Ваш баланс: ${balance.toFixed(8)} BTC`;
-
-    // Логируем добавление обработчика события на кнопку
-    console.log("Добавляем обработчик события на кнопку 'mineBtn'");
-
-    // Обработка нажатия кнопки "Начать майнинг"
+    // Логика кнопки "Начать майнинг"
     mineBtn.addEventListener('click', () => {
-        console.log("Нажата кнопка майнинга");
-
         statusText.textContent = 'Майнинг...';
-
-        // Имитация процесса майнинга с задержкой в 2 секунды
         setTimeout(() => {
-            const minedAmount = Math.random().toFixed(8); // Случайное число с 8 знаками после запятой
+            const minedAmount = Math.random().toFixed(8);
             balance += parseFloat(minedAmount);
-            console.log(`Намайнили: ${minedAmount} BTC`);
             statusText.textContent = `Вы намайнили: ${minedAmount} BTC`;
             balanceText.textContent = `Ваш баланс: ${balance.toFixed(8)} BTC`;
         }, 2000);
+    });
+
+    // Логика для кнопок разделов
+    farmBtn.addEventListener('click', () => {
+        statusText.textContent = 'Вы открыли раздел "Ферма". Здесь можно управлять вашей криптофермой.';
+    });
+
+    shopBtn.addEventListener('click', () => {
+        statusText.textContent = 'Вы открыли раздел "Магазин". Здесь можно покупать улучшения.';
+    });
+
+    gamesBtn.addEventListener('click', () => {
+        statusText.textContent = 'Вы открыли раздел "Игры". Здесь можно играть в мини-игры.';
+    });
+
+    profileBtn.addEventListener('click', () => {
+        statusText.textContent = 'Вы открыли раздел "Профиль". Здесь можно посмотреть статистику.';
     });
 });
