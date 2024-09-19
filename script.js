@@ -1,8 +1,10 @@
-// Telegram Web App API и инициализация
+// Объявляем переменную tg на уровне всего скрипта, чтобы она была доступна в любом месте
+let tg = null;
 let user = null;  // Переменная для хранения данных пользователя
 
+// Проверяем, доступен ли Telegram Web Apps API
 if (window.Telegram && window.Telegram.WebApp) {
-    const tg = window.Telegram.WebApp;
+    tg = window.Telegram.WebApp;
     tg.expand();
 
     // Получение данных пользователя Telegram
