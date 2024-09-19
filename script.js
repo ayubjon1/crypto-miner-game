@@ -1,24 +1,43 @@
-// Инициализация Web App API Telegram
+// Инициализация Telegram Web App API
 const tg = window.Telegram.WebApp;
 
-// Расширение приложения на весь экран
+// Расширение Web App на весь экран
 tg.expand();
 
-// Получение данных пользователя
+// Получение данных пользователя Telegram
 const user = tg.initDataUnsafe.user;
 
-console.log(`Привет, ${user.first_name}!`);
+// Отображение имени пользователя на экране
+document.addEventListener("DOMContentLoaded", () => {
+    const statusText = document.getElementById('statusText');
+    const balanceText = document.getElementById('balance');
+    
+    if (user) {
+        statusText.textContent = `Привет, ${user.first_name}! Добро пожаловать в Крипто-майнер!`;
+    } else {
+        statusText.textContent = 'Добро пожаловать в Крипто-майнер!';
+    }
 
-// Пример: добавить взаимодействие с Telegram кнопками
-tg.MainButton.text = "Запустить майнинг";
-tg.MainButton.show();
-
-tg.MainButton.onClick(() => {
-    startMining(); // Функция запуска майнинга
-    tg.MainButton.hide();
+    // Стартовый баланс
+    let balance = 0;
+    balanceText.textContent = `Ваш баланс: ${balance.toFixed(8)} BTC`;
 });
 
-function startMining() {
-    // Ваш код для старта майнинга
-    alert("Майнинг начался!");
+// Эмуляция майнинга криптовалюты
+function mineCrypto() {
+    const statusText = document.getElementById('statusText');
+    const balanceText = document.getElementById('balance');
+
+    statusText.textContent = 'Майнинг...';
+
+    // Имитация процесса майнинга с задержкой в 2 секунды
+    setTimeout(() => {
+        const minedAmount = Math.random().toFixed(8); // Случайное число с 8 знаками после запятой
+        balance += parseFloat(minedAmount);
+        statusText.textContent = `Вы намайнили: ${minedAmount} BTC`;
+        balanceText.textContent = `Ваш баланс: ${balance.toFixed(8)} BTC`;
+    }, 2000);
 }
+
+// Обработка нажатия кнопки "Начать майнинг"
+document.getElementById('mineBtn').addEventListener('click', mineCrypto);
