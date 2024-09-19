@@ -14,7 +14,7 @@ if (window.Telegram && window.Telegram.WebApp) {
     console.error("Telegram Web App API не доступен. Запустите игру в Telegram.");
 }
 
-let balance = 0;
+let balance = 0; // Стартовый баланс игрока
 
 document.addEventListener("DOMContentLoaded", () => {
     const statusText = document.getElementById('statusText');
@@ -52,6 +52,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     profileBtn.addEventListener('click', () => {
-        statusText.textContent = 'Вы открыли раздел "Профиль". Здесь можно посмотреть статистику.';
+        // Проверка наличия данных пользователя
+        if (tg.initDataUnsafe.user) {
+            const user = tg.initDataUnsafe.user;
+            const userProfile = `
+                Имя: ${user.first_name || 'Неизвестно'}
+                Фамилия: ${user.last_name || 'Неизвестно'}
+                Username: ${user.username || 'Нет'}
+                Telegram ID: ${user.id}
+                Баланс: ${balance.toFixed(8)} BTC
+            `;
+            statusText.textContent = `Профиль игрока:\n${userProfile}`;
+        } else {
+            statusText.textContent = 'Профиль не доступен. Запустите игру через Telegram.';
+        }
     });
 });
