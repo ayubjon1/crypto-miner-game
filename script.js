@@ -1,4 +1,4 @@
-// Проверка, загружен ли Telegram Web Apps API
+// aaaПроверка, загружен ли Telegram Web Apps API
 if (window.Telegram && window.Telegram.WebApp) {
     // Инициализация Telegram Web App API
     const tg = window.Telegram.WebApp;
