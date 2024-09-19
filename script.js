@@ -11,6 +11,11 @@ if (window.Telegram && window.Telegram.WebApp) {
     // Получение данных пользователя Telegram
     const user = tg.initDataUnsafe.user;
 
+    if (user) {
+        console.log(`Пользователь Telegram: ${user.first_name}`);
+    } else {
+        console.log("Пользователь Telegram не обнаружен.");
+    }
 } else {
     console.error("Telegram Web App API is not available. Are you running this in Telegram?");
 }
@@ -35,11 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
     balanceText.textContent = `Ваш баланс: ${balance.toFixed(8)} BTC`;
 
     // Логируем добавление обработчика события на кнопку
-    console.log("Adding event listener to 'mineBtn'");
+    console.log("Добавляем обработчик события на кнопку 'mineBtn'");
 
     // Обработка нажатия кнопки "Начать майнинг"
     mineBtn.addEventListener('click', () => {
-        console.log("Mine button clicked");
+        console.log("Нажата кнопка майнинга");
 
         statusText.textContent = 'Майнинг...';
 
@@ -47,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             const minedAmount = Math.random().toFixed(8); // Случайное число с 8 знаками после запятой
             balance += parseFloat(minedAmount);
+            console.log(`Намайнили: ${minedAmount} BTC`);
             statusText.textContent = `Вы намайнили: ${minedAmount} BTC`;
             balanceText.textContent = `Ваш баланс: ${balance.toFixed(8)} BTC`;
         }, 2000);
